@@ -5,15 +5,22 @@
 
 #include <vector>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Shape {
-    GenericShape::GenericShape(const std::vector<GLfloat>& vertices, const std::vector<GLuint>& indices, int componentAmount, GLenum drawMode)
-        : m_componentAmount { componentAmount }   
-        , m_drawMode { drawMode }                 
-        , m_VBO{}                                 
-        , m_VAO{}
-        , m_EBO{}
-        , m_vertices { vertices }                 
-        , m_indices { indices }                   
+    GenericShape::GenericShape(const std::vector<GLfloat>& vertices, 
+                         const glm::vec3& pos,
+                         const std::vector<GLuint>& indices,
+                         int componentAmount, 
+                         GLenum drawMode)     
+        : m_vertices { vertices }
+        , m_pos { pos }
+        , m_indices { indices }
+        , m_componentAmount { componentAmount }
+        , m_drawMode { drawMode }    
+        , m_modelMatrix { glm::translate(glm::mat4(1.0f), pos) }
     {
     }
 
@@ -41,9 +48,14 @@ namespace Shape {
         }
     }
 
-    void GenericShape::draw(GLuint first, GLuint count, GLenum drawMode) {
+    void GenericShape::draw(GLuint first, GLuint count, GLuint shaderID, GLenum drawMode, bool passMVP) {
         if (drawMode == 0)
             drawMode = m_drawMode;
+
+        glUseProgram(shaderID);
+
+        if (passMVP)
+            glUniformMatrix4fv(glGetUniformLocation(shaderID, "model"), 1, GL_FALSE, glm::value_ptr(m_modelMatrix));
 
         glBindVertexArray(m_VAO);
 

@@ -6,29 +6,37 @@
 
 #include <vector>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Shape {
     class GenericShape {
         private:
+            std::vector<GLfloat> m_vertices{};
+            glm::vec3 m_pos{};
+            std::vector<GLuint> m_indices{};
             int m_componentAmount{};
-
             GLenum m_drawMode{};
 
             GLuint m_VBO{};
             GLuint m_VAO{};
             GLuint m_EBO{};
 
-            std::vector<GLfloat> m_vertices{};
-            std::vector<GLuint> m_indices{};
-
+            glm::mat4 m_modelMatrix{};
 
         public:
-            GenericShape(const std::vector<GLfloat>& vertices, const std::vector<GLuint>& indices = {}, int componentAmount = 3, GLenum drawMode = GL_TRIANGLE_FAN);
+            GenericShape(const std::vector<GLfloat>& vertices = {}, 
+                         const glm::vec3& pos = glm::vec3(0.0f, 0.0f, 0.0f),
+                         const std::vector<GLuint>& indices = {},
+                         int componentAmount = 3, 
+                         GLenum drawMode = GL_TRIANGLES);                         
             virtual ~GenericShape();
 
             void link();
             void linkAttrib(int index, int size, int stride, void *offset);
 
-            void draw(GLuint first, GLuint count, GLenum drawMode = 0);
+            void draw(GLuint first, GLuint count, GLuint shaderID = 0, GLenum drawMode = 0, bool passMVP = true);
 
             void addVertex(GLfloat x, GLfloat y);
             void removeLastVertex();
@@ -45,6 +53,24 @@ namespace Shape {
             inline GLuint VBO() const { return m_VBO; }
             inline GLuint VAO() const { return m_VAO; }
             inline GLuint EBO() const { return m_EBO; }
+
+            const glm::vec3& pos() const { return m_pos; }
+            void setPos(const glm::vec3& pos) { m_pos = pos; }
+
+            void translate(float x, float y, float z) { m_modelMatrix = glm::translate(m_modelMatrix, glm::vec3(x, y, z)); }
+            void translate(const glm::vec3& transformationMatrix) { m_modelMatrix = glm::translate(m_modelMatrix, transformationMatrix); }
+
+            void scale(float x, float y, float z) { m_modelMatrix = glm::scale(m_modelMatrix, glm::vec3(x, y, z)); }
+            void scale(const glm::vec3& scaleMatrix) { m_modelMatrix = glm::scale(m_modelMatrix, scaleMatrix); }
+
+            void rotate(float angleRadians, float x, float y, float z) { m_modelMatrix = glm::rotate(m_modelMatrix, angleRadians, glm::vec3(x, y, z)); }
+            void rotate(float angleRadians, const glm::vec3& rotationMatrix) { m_modelMatrix = glm::rotate(m_modelMatrix, angleRadians, rotationMatrix); }
+
+            void resetModelMatrix() { m_modelMatrix = glm::mat4(1.0f); }
+
+            int x() { return m_pos.x; }
+            int y() { return m_pos.y; }
+            int z() { return m_pos.z; }
     };
 }
 
