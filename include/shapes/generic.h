@@ -30,7 +30,8 @@ namespace Shape {
                          const glm::vec3& pos = glm::vec3(0.0f, 0.0f, 0.0f),
                          const std::vector<GLuint>& indices = {},
                          int componentAmount = 3, 
-                         GLenum drawMode = GL_TRIANGLES);                         
+                         GLenum drawMode = GL_TRIANGLES);    
+
             virtual ~GenericShape();
 
             void link();
@@ -54,11 +55,27 @@ namespace Shape {
             inline GLuint VAO() const { return m_VAO; }
             inline GLuint EBO() const { return m_EBO; }
 
-            const glm::vec3& pos() const { return m_pos; }
-            void setPos(const glm::vec3& pos) { m_pos = pos; }
+            const glm::mat4& modelMatrix() { return m_modelMatrix; }
+            void setModelMatrix(glm::mat4& m) { 
+                m_modelMatrix = m;
+                m_pos = glm::vec3(m[3]);
+            }
 
-            void translate(float x, float y, float z) { m_modelMatrix = glm::translate(m_modelMatrix, glm::vec3(x, y, z)); }
-            void translate(const glm::vec3& transformationMatrix) { m_modelMatrix = glm::translate(m_modelMatrix, transformationMatrix); }
+            const glm::vec3& pos() const { return m_pos; }
+            void setPos(const glm::vec3& pos) {
+                m_pos = pos; 
+                m_modelMatrix = glm::translate(glm::mat4(1.0f), m_pos);
+            }
+
+            void translate(float x, float y, float z) { 
+                m_modelMatrix = glm::translate(m_modelMatrix, glm::vec3(x, y, z)); 
+                m_pos += glm::vec3(x, y, z);
+            }
+            
+            void translate(const glm::vec3& transformationMatrix) { 
+                m_modelMatrix = glm::translate(m_modelMatrix, transformationMatrix); 
+                m_pos += transformationMatrix;
+            }
 
             void scale(float x, float y, float z) { m_modelMatrix = glm::scale(m_modelMatrix, glm::vec3(x, y, z)); }
             void scale(const glm::vec3& scaleMatrix) { m_modelMatrix = glm::scale(m_modelMatrix, scaleMatrix); }
