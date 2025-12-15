@@ -12,8 +12,10 @@
 
 namespace Shape {
     class GenericShape {
-        private:
+        protected:
             std::vector<GLfloat> m_vertices{};
+
+        private:
             glm::vec3 m_pos{};
             std::vector<GLuint> m_indices{};
             int m_componentAmount{};
@@ -76,13 +78,7 @@ namespace Shape {
                 m_modelMatrix = glm::translate(m_modelMatrix, transformationMatrix); 
                 m_pos += transformationMatrix;
             }
-
-            void scale(float x, float y, float z) { m_modelMatrix = glm::scale(m_modelMatrix, glm::vec3(x, y, z)); }
-            void scale(const glm::vec3& scaleMatrix) { m_modelMatrix = glm::scale(m_modelMatrix, scaleMatrix); }
-
-            void rotate(float angleRadians, float x, float y, float z) { m_modelMatrix = glm::rotate(m_modelMatrix, angleRadians, glm::vec3(x, y, z)); }
-            void rotate(float angleRadians, const glm::vec3& rotationMatrix) { m_modelMatrix = glm::rotate(m_modelMatrix, angleRadians, rotationMatrix); }
-
+            
             void resetModelMatrix() { m_modelMatrix = glm::mat4(1.0f); }
 
             int x() { return m_pos.x; }
