@@ -18,19 +18,35 @@ namespace Shape {
     {
     }
 
-    void Circle::generateVertices() {
+    void Circle::generateVertices(float scale, bool genTextures) {
         if (!m_vertices.empty())
             return;
 
         for (int i = 0; i < 3; i++)
             m_vertices.push_back(0.0f);
 
+        if (genTextures) {
+            m_vertices.push_back(0.5f);
+            m_vertices.push_back(0.5f);
+        }   
+
         for (int i = 0; i <= m_segments; i++) {
             float theta = 2.0f * M_PI * i / m_segments;
 
-            m_vertices.push_back((m_radius * cos(theta)) * 100.0f);
-            m_vertices.push_back((m_radius * sin(theta)) * 100.0f);
+            float x { (m_radius * cos(theta)) * scale };
+            float y { (m_radius * sin(theta)) * scale };
+
+            m_vertices.push_back(x);
+            m_vertices.push_back(y);
             m_vertices.push_back(0.0f);
+
+            if (genTextures) {
+                float s { 0.5f + (cos(theta) * 0.5f) };
+                float t { 0.5f + (sin(theta) * 0.5f) };
+
+                m_vertices.push_back(s);
+                m_vertices.push_back(t);
+            }
         }
     }
 

@@ -21,7 +21,7 @@ namespace Shape {
         public:
             Circle(float radius = 0.0f, int segments = 0, const glm::vec3& pos = glm::vec3(0.0f, 0.0f, 0.0f), int componentAmount = 3);
 
-            void generateVertices();
+            void generateVertices(float scale = 1.0f, bool genTextures = false);
             void draw(GLuint shaderID, bool passMVP = true);
 
             inline float radius() const { return m_radius; }
