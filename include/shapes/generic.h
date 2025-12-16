@@ -36,17 +36,15 @@ namespace Shape {
                          int componentAmount = 3, 
                          GLenum drawMode = GL_TRIANGLES);    
 
+            GenericShape(const GenericShape&) = delete;            
+            GenericShape& operator=(const GenericShape&) = delete;
+
             virtual ~GenericShape();
 
             void link();
             void linkAttrib(int index, int size, int stride, void *offset);
 
-            void passModelMatrix(Shader::ShaderProgram& shader, GLchar *modelMatrixUniformName = "model");
-
-            void draw(GLuint first, GLuint count, GLenum drawMode = 0);
-
-            void addVertex(GLfloat x, GLfloat y);
-            void removeLastVertex();
+            void draw(GLuint first, GLuint count, GLenum drawMode);
 
             inline std::vector<GLfloat> vertices() const { return m_vertices; }
             inline void setVertices(const std::vector<GLfloat>& v) { m_vertices = v; }

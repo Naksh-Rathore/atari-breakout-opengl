@@ -27,9 +27,9 @@ namespace Shape {
     }
 
     GenericShape::~GenericShape() {
-        glDeleteVertexArrays(1, &m_VAO);
-        glDeleteBuffers(1, &m_VBO);
-        glDeleteBuffers(1, &m_EBO);
+        if (m_VAO) glDeleteVertexArrays(1, &m_VAO);
+        if (m_VBO) glDeleteBuffers(1, &m_VBO);
+        if (m_EBO) glDeleteBuffers(1, &m_EBO);
     }
 
     void GenericShape::link() {
@@ -50,15 +50,8 @@ namespace Shape {
         }
     }
 
-    void GenericShape::passModelMatrix(Shader::ShaderProgram& shader, GLchar *modelMatrixUniformName) {
-        shader.setMatrixUniform(modelMatrixUniformName, m_modelMatrix);
-    }
-
 
     void GenericShape::draw(GLuint first, GLuint count, GLenum drawMode) {
-        if (drawMode == 0)
-            drawMode = m_drawMode;
-
         glBindVertexArray(m_VAO);
 
         if (m_indices.empty())
@@ -66,21 +59,6 @@ namespace Shape {
 
         else
             glDrawElements(drawMode, count, GL_UNSIGNED_INT, 0);
-    }
-
-
-    void GenericShape::addVertex(GLfloat x, GLfloat y) {
-        m_vertices.push_back(x);
-        m_vertices.push_back(y);
-        m_vertices.push_back(0.0f);
-    }
-
-    void GenericShape::removeLastVertex() {
-        if (m_vertices.size() >= 3) {
-            m_vertices.pop_back();
-            m_vertices.pop_back();
-            m_vertices.pop_back();
-        }
     }
 
 
