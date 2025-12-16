@@ -4,6 +4,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "shaders/shader.h"
 
 namespace Shader {
@@ -17,6 +21,10 @@ namespace Shader {
 
             void link(Shader& vertexShader, Shader& fragmentShader);
             void use();
+
+            GLuint uniformLocation(GLchar *uniformName);
+
+            void setMatrixUniform(GLchar *uniformName, glm::mat4 matrix);
 
             GLuint shaderProgram() const { return m_shaderProgram; }
             void setShaderProgram(GLuint val) { m_shaderProgram = val; }

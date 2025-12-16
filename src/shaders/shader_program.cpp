@@ -4,6 +4,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <string_view>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Shader {
     ShaderProgram::ShaderProgram()
         : m_shaderProgram { glCreateProgram() }
@@ -28,6 +34,14 @@ namespace Shader {
 
     void ShaderProgram::use() {
         glUseProgram(m_shaderProgram);
+    }
+
+    GLuint ShaderProgram::uniformLocation(GLchar *uniformName) {
+        return glGetUniformLocation(m_shaderProgram, uniformName);
+    }
+
+    void ShaderProgram::setMatrixUniform(GLchar *uniformName, glm::mat4 matrix) {
+        glUniformMatrix4fv(uniformLocation(uniformName), 1, GL_FALSE, glm::value_ptr(matrix));
     }
 
 }
