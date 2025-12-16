@@ -15,9 +15,9 @@
 namespace Shape {
     class Rectangle : public GenericShape {
         public:
-            Rectangle(std::vector<GLfloat>& vertices, glm::vec3& pos, std::vector<GLuint> indices, int componentAmount);
+            Rectangle(const std::vector<GLfloat>& vertices, const glm::vec3& pos, const std::vector<GLuint>& indices, int componentAmount);
 
-            void draw(GLuint shaderID = 0, bool passMVP = true);
+            void draw();
     };
 }
 

@@ -3,6 +3,8 @@
 
 #include "shapes/generic.h"
 
+#include "shaders/shader_program.h"
+
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -48,14 +50,14 @@ namespace Shape {
         }
     }
 
-    void GenericShape::draw(GLuint first, GLuint count, GLuint shaderID, GLenum drawMode, bool passMVP) {
+    void GenericShape::passModelMatrix(Shader::ShaderProgram& shader, GLchar *modelMatrixUniformName) {
+        shader.setMatrixUniform(modelMatrixUniformName, m_modelMatrix);
+    }
+
+
+    void GenericShape::draw(GLuint first, GLuint count, GLenum drawMode) {
         if (drawMode == 0)
             drawMode = m_drawMode;
-
-        glUseProgram(shaderID);
-
-        if (passMVP)
-            glUniformMatrix4fv(glGetUniformLocation(shaderID, "model"), 1, GL_FALSE, glm::value_ptr(m_modelMatrix));
 
         glBindVertexArray(m_VAO);
 

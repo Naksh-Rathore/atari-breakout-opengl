@@ -50,12 +50,7 @@ namespace Shape {
         }
     }
 
-    void Circle::draw(GLuint shaderID, bool passMVP) {
-        glUseProgram(shaderID);
-
-        if (passMVP)
-            glUniformMatrix4fv(glGetUniformLocation(shaderID, "model"), 1, GL_FALSE, glm::value_ptr(this->modelMatrix()));
-
+    void Circle::draw() {
         glBindVertexArray(this->VAO());
         glDrawArrays(drawMode(), 0, m_segments + 2);
     }

@@ -10,6 +10,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "shaders/shader_program.h"
+
 namespace Shape {
     class GenericShape {
         protected:
@@ -39,7 +41,9 @@ namespace Shape {
             void link();
             void linkAttrib(int index, int size, int stride, void *offset);
 
-            void draw(GLuint first, GLuint count, GLuint shaderID = 0, GLenum drawMode = 0, bool passMVP = true);
+            void passModelMatrix(Shader::ShaderProgram& shader, GLchar *modelMatrixUniformName = "model");
+
+            void draw(GLuint first, GLuint count, GLenum drawMode = 0);
 
             void addVertex(GLfloat x, GLfloat y);
             void removeLastVertex();
