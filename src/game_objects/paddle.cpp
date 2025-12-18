@@ -72,4 +72,8 @@ namespace GameObject {
 
         m_shader.link(m_vert, m_frag);
     }
+
+    void Paddle::linkTextures(const std::string& texturePath) {
+        m_texture.link(texturePath, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+    }
 }

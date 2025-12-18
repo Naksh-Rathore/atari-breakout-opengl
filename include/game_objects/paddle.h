@@ -46,6 +46,7 @@ namespace GameObject {
 
             void linkShape();
             void linkShaders();
+            void linkTextures(const std::string& texturePath);
             
             void render();
             void getKeyInput(GLFWwindow *window, float posBorderX, float negBorderX);
