@@ -31,7 +31,6 @@ namespace GameObject {
 
             glm::vec3 m_velocity;
 
-
         public:
             Ball(float radius,
                  int segments,
