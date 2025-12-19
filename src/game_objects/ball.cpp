@@ -76,7 +76,7 @@ namespace GameObject {
     void Ball::update(Paddle& paddle, float paddleWidth, float paddleHeight) {
 
         if (isTouchingPaddle(paddle, paddleWidth, paddleHeight))
-            m_velocity.y *= -1;
+            m_velocity.y = abs(m_velocity.y);
 
         if (m_circle.x() > 350.0f || m_circle.x() < -350.0f)
             m_velocity.x *= -1;
