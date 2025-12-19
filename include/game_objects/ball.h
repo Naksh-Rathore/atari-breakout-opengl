@@ -31,7 +31,6 @@ namespace GameObject {
 
             glm::vec3 m_velocity;
 
-            bool isTouchingPaddle(Paddle& paddle, float paddleWidth, float paddleHeight);
 
         public:
             Ball(float radius,

@@ -19,6 +19,8 @@
 #include "shaders/shader.h"
 #include "shaders/shader_program.h"
 
+#include "collisions/collisions.h"
+
 namespace GameObject {
     Ball::Ball(float radius,
                  int segments,
@@ -58,24 +60,10 @@ namespace GameObject {
         m_texture.link(texturePath, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
     }
 
-    bool Ball::isTouchingPaddle(Paddle& paddle, float paddleWidth, float paddleHeight) {
-        float circleDistanceX { abs(m_circle.x() - paddle.rect().x()) };
-        float circleDistanceY { abs(m_circle.y() - paddle.rect().y()) };
-
-        if (circleDistanceX > (paddleWidth / 2 + m_circle.radius())) { return false; }
-        if (circleDistanceY > (paddleHeight / 2 + m_circle.radius())) { return false; }
-    
-        if (circleDistanceX <= (paddleWidth / 2)) { return true; } 
-        if (circleDistanceY <= (paddleHeight / 2)) { return true; }
-
-        float cornerDistanceSquared { pow((circleDistanceX - paddleWidth/2), 2) + pow((circleDistanceY - paddleHeight/2), 2) };
-    
-        return (cornerDistanceSquared <= pow(m_circle.radius(), 2));
-    }
 
     void Ball::update(Paddle& paddle, float paddleWidth, float paddleHeight) {
 
-        if (isTouchingPaddle(paddle, paddleWidth, paddleHeight))
+        if (Collision::circleRectangle(m_circle, paddle.rect(), paddleWidth, paddleHeight))
             m_velocity.y = abs(m_velocity.y);
 
         if (m_circle.x() > 350.0f || m_circle.x() < -350.0f)
