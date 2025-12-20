@@ -9,6 +9,8 @@
 
 namespace Collision {
     bool circleRectangle(Shape::Circle& circle, Shape::Rectangle& rect, float rectWidth, float rectHeight);
+    bool circleRectangle(float circleX, float circleY, float circleRadius, float rectX, float rectY, float rectWidth, float rectHeight);
+
 }
 
 #endif
