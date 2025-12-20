@@ -50,7 +50,6 @@ namespace GameObject {
                                        m_worldPos.x, m_worldPos.y, 
                                        100.0f, 50.0f) && m_isDestroyable) {
             m_isDestroyed = true;
-            std::cout << "Collided with ball" << "\n";
         }
     }
 }
