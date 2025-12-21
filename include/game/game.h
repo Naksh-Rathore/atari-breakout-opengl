@@ -4,9 +4,11 @@
 #include <glad/glad.h>
 
 #include <vector>
+#include <string>
 
 #include "game_objects/ball.h"
 #include "game_objects/paddle.h"
+#include "game_objects/brick.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -17,9 +19,14 @@ namespace Game {
         private:
             GameObject::Paddle m_paddle;
             GameObject::Ball m_ball;
+            GameObject::BrickMesh m_brickMesh;
+
+            std::vector<GameObject::Brick> m_bricks;
 
             glm::mat4 m_view;
             glm::mat4 m_projection;
+
+            void parseLevel(const std::string& levelContent);
 
         public:
             Game();
@@ -28,6 +35,8 @@ namespace Game {
 
             void linkBall();
             void linkPaddle();
+            void linkBricks(const std::string& levelFilename);
+            void linkBrickMesh();
 
             void drawAllObjects();
 

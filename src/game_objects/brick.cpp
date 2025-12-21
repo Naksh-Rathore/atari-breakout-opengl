@@ -34,8 +34,9 @@ namespace GameObject {
         m_rect.draw();
     }
 
-    Brick::Brick(const glm::vec3& worldPos, bool isDestroyable)
+    Brick::Brick(const glm::vec3& worldPos, const glm::vec3& color, bool isDestroyable)
         : m_worldPos(worldPos)
+        , m_color(color)
         , m_isDestroyable(isDestroyable)
         , m_isDestroyed(false)
         , m_modelMatrix(glm::mat4(1.0f))

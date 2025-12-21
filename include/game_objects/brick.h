@@ -57,8 +57,10 @@ namespace GameObject {
             glm::mat4 m_modelMatrix;
             glm::vec3 m_worldPos;
 
+            glm::vec3 m_color;
+
         public:
-            Brick(const glm::vec3& worldPos, bool isDestroyable = true);
+            Brick(const glm::vec3& worldPos, const glm::vec3& color, bool isDestroyable = true);
 
             void update(GameObject::Ball& ball);
 
@@ -73,6 +75,9 @@ namespace GameObject {
 
             const glm::vec3& worldPos() const { return m_worldPos; }
             void setWorldPos(const glm::vec3& pos) { m_worldPos = pos; }
+
+            const glm::vec3& color() { return m_color; }
+            void setColor(const glm::vec3& c) { m_color = c; }
     };
 }
 
