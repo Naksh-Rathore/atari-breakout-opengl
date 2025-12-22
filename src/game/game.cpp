@@ -17,7 +17,7 @@
 
 namespace Game {
     Game::Game()
-        : m_ball(0.5f, 72, glm::vec3(0.0f, 0.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", glm::vec3(500.0f, 550.1f, 0.0f))
+        : m_ball(0.5f, 72, glm::vec3(0.0f, 0.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", glm::vec3(700.0f, 800.1f, 0.0f))
         // Clean up later
         , m_paddle(std::vector<GLfloat> { 200.0f, 50.0f, 0.0f, 1.0f, 1.0f,  200.0f, -50.0f, 0.0f, 1.0f, 0.0f,  -200.0f, -50.0f, 0.0f, 0.0f, 0.0f,  -200.0f, 50.0f, 0.0f, 0.0f, 1.0f }, glm::vec3(0.0f, -300.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", 600.0f )
         , m_brickMesh(glm::vec3(0.0f, 0.0f, 0.0f))
@@ -84,7 +84,7 @@ namespace Game {
 
         for (auto character : levelContent) {
             if (character == '\n') {
-                position.y -= 150.0f;
+                position.y -= 125.0f;
                 position.x = -300.0f;
 
                 continue;
@@ -92,27 +92,27 @@ namespace Game {
 
             switch (character) {
                 case '0':
-                    position.x += 150.0f;
+                    position.x += 125.0f;
                     break;
 
                 case '1':
                     m_bricks.emplace_back(position, glm::vec3(1.0f, 1.0f, 1.0f), false);
-                    position.x += 150.0f;   
+                    position.x += 125.0f;   
                     break;
 
                 case '2':
                     m_bricks.emplace_back(position, glm::vec3(1.0f, 0.0f, 0.0f));
-                    position.x += 150.0f;
+                    position.x += 125.0f;
                     break;
                 
                 case '3':
                     m_bricks.emplace_back(position, glm::vec3(0.0f, 1.0f, 0.0f));
-                    position.x += 150.0f;
+                    position.x += 125.0f;
                     break;
 
                 case '4':
                     m_bricks.emplace_back(position, glm::vec3(0.0f, 0.0f, 1.0f));
-                    position.x += 150.0f;
+                    position.x += 125.0f;
                     break;
             }
         }

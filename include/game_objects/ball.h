@@ -54,6 +54,9 @@ namespace GameObject {
             Shader::Shader& vertShader() { return m_vert; }
             Shader::Shader& fragShader() { return m_frag; }
             Shader::ShaderProgram& shader() { return m_shader; }
+
+            void flipVelocityX() { m_velocity.x *= -1; }
+            void flipVelocityY() { m_velocity.y *= -1; }
     };
 }
 

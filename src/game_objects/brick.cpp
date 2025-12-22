@@ -49,8 +49,9 @@ namespace GameObject {
                                        ball.circle().y(), 
                                        ball.circle().radius(), 
                                        m_worldPos.x, m_worldPos.y, 
-                                       100.0f, 50.0f) && m_isDestroyable) {
-            m_isDestroyed = true;
+                                       150.0f, 100.0f)) {
+            if (m_isDestroyable)
+                m_isDestroyed = true;
         }
     }
 }
