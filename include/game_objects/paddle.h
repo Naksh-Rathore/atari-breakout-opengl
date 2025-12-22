@@ -32,7 +32,6 @@ namespace GameObject {
             bool isTouchingRightBorder(float posBorderX);
             bool isTouchingLeftBorder(float negBorderX);
 
-
         public:
 
             Paddle(const std::vector<GLfloat>& vertices,
@@ -49,7 +48,7 @@ namespace GameObject {
             void linkTextures(const std::string& texturePath);
             
             void render();
-            void getKeyInput(GLFWwindow *window, float posBorderX, float negBorderX);
+            void getKeyInput(GLFWwindow *window, float posBorderX, float negBorderX, float deltaTime);
 
             Shape::Rectangle& rect() { return m_rect; }
             Texture::Texture& texture() { return m_texture; }

@@ -4,6 +4,9 @@
 #include <fstream>
 #include <iostream>
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include "game_objects/ball.h"
 #include "game_objects/paddle.h"
 #include "game_objects/brick.h"
@@ -14,12 +17,14 @@
 
 namespace Game {
     Game::Game()
-        : m_ball(0.5f, 72, glm::vec3(0.0f, 0.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", glm::vec3(1.0f, 1.1f, 0.0f))
+        : m_ball(0.5f, 72, glm::vec3(0.0f, 0.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", glm::vec3(500.0f, 550.1f, 0.0f))
         // Clean up later
-        , m_paddle(std::vector<GLfloat> { 200.0f, 50.0f, 0.0f, 1.0f, 1.0f,  200.0f, -50.0f, 0.0f, 1.0f, 0.0f,  -200.0f, -50.0f, 0.0f, 0.0f, 0.0f,  -200.0f, 50.0f, 0.0f, 0.0f, 1.0f }, glm::vec3(0.0f, -300.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", 2.0f )
+        , m_paddle(std::vector<GLfloat> { 200.0f, 50.0f, 0.0f, 1.0f, 1.0f,  200.0f, -50.0f, 0.0f, 1.0f, 0.0f,  -200.0f, -50.0f, 0.0f, 0.0f, 0.0f,  -200.0f, 50.0f, 0.0f, 0.0f, 1.0f }, glm::vec3(0.0f, -300.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", 600.0f )
         , m_brickMesh(glm::vec3(0.0f, 0.0f, 0.0f))
         , m_view(glm::mat4(1.0f))
         , m_projection(glm::ortho(-400.0f, 400.0f, -400.0f, 400.0f))
+        , m_deltaTime(0.0f)
+        , m_lastFrame(0.0f)
     {
     }
 
@@ -114,6 +119,11 @@ namespace Game {
     }
 
     void Game::drawAllObjects() {
+        float currentFrame { glfwGetTime() };
+
+        m_deltaTime = currentFrame - m_lastFrame;
+        m_lastFrame = currentFrame;  
+
         for (GameObject::Brick &brick : m_bricks) {
             if (brick.isDestroyed() && brick.isDestroyable())
                 continue;
@@ -125,7 +135,7 @@ namespace Game {
 
         m_paddle.render();
 
-        m_ball.update(m_paddle, 500, 200);
+        m_ball.update(m_paddle, 500, 200, m_deltaTime);
         m_ball.render();
     }
 }

@@ -61,7 +61,7 @@ namespace GameObject {
     }
 
 
-    void Ball::update(Paddle& paddle, float paddleWidth, float paddleHeight) {
+    void Ball::update(Paddle& paddle, float paddleWidth, float paddleHeight, float deltaTime) {
 
         if (Collision::circleRectangle(m_circle, paddle.rect(), paddleWidth, paddleHeight))
             m_velocity.y = abs(m_velocity.y);
@@ -71,7 +71,7 @@ namespace GameObject {
         if (m_circle.y() > 350.0f || m_circle.y() < -350.0f)
             m_velocity.y *= -1;
 
-        m_circle.translate(m_velocity);
+        m_circle.translate(m_velocity * deltaTime);
     }
 }
 

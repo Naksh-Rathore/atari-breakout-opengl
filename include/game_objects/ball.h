@@ -44,7 +44,7 @@ namespace GameObject {
             void linkTextures(const std::string& texturePath);
 
             void render();
-            void update(Paddle& paddle, float paddleWidth, float paddleHeight);
+            void update(Paddle& paddle, float paddleWidth, float paddleHeight, float deltaTime);
 
             Ball(const Ball&) = delete;            
             Ball& operator=(const Ball&) = delete;

@@ -44,7 +44,6 @@ namespace GameObject {
         return false;
     }
 
-
     void Paddle::render() {
         m_shader.use();
         m_texture.use();
@@ -54,11 +53,11 @@ namespace GameObject {
         m_rect.draw();
     }
 
-    void Paddle::getKeyInput(GLFWwindow *window, float posBorderX, float negBorderX) {
+    void Paddle::getKeyInput(GLFWwindow *window, float posBorderX, float negBorderX, float deltaTime) {
         if (glfwGetKey(window, GLFW_KEY_RIGHT) && !isTouchingRightBorder(posBorderX))
-            m_rect.translate(m_moveValue, 0.0f, 0.0f);
+            m_rect.translate(m_moveValue * deltaTime, 0.0f, 0.0f);
         if (glfwGetKey(window, GLFW_KEY_LEFT) && !isTouchingLeftBorder(negBorderX))
-            m_rect.translate(-m_moveValue, 0.0f, 0.0f);
+            m_rect.translate(-(m_moveValue * deltaTime), 0.0f, 0.0f);
     }
 
     void Paddle::linkShape() {

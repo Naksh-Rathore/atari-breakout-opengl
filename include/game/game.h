@@ -26,6 +26,9 @@ namespace Game {
             glm::mat4 m_view;
             glm::mat4 m_projection;
 
+            float m_deltaTime;
+            float m_lastFrame;
+
             void parseLevel(const std::string& levelContent);
 
         public:
@@ -43,7 +46,8 @@ namespace Game {
             GameObject::Paddle& paddle() { return m_paddle; }
             GameObject::Ball& ball() { return m_ball; }
             glm::mat4& view() { return m_view; }
-            glm::mat4& projection() { return m_projection; }
+            glm::mat4& projection() { return m_projection; }    
+            float deltaTime() { return m_deltaTime; }
     };
 }
 
