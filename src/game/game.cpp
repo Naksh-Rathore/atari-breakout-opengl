@@ -17,7 +17,7 @@
 
 namespace Game {
     Game::Game()
-        : m_ball(0.5f, 72, glm::vec3(0.0f, 0.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", glm::vec3(700.0f, 800.1f, 0.0f))
+        : m_ball(0.5f, 72, glm::vec3(0.0f, -200.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", glm::vec3(700.0f, 800.1f, 0.0f))
         // Clean up later
         , m_paddle(std::vector<GLfloat> { 200.0f, 50.0f, 0.0f, 1.0f, 1.0f,  200.0f, -50.0f, 0.0f, 1.0f, 0.0f,  -200.0f, -50.0f, 0.0f, 0.0f, 0.0f,  -200.0f, 50.0f, 0.0f, 0.0f, 1.0f }, glm::vec3(0.0f, -300.0f, 0.0f), "assets/shaders/ball_paddle/vertex.vs", "assets/shaders/ball_paddle/fragment.fs", 600.0f )
         , m_brickMesh(glm::vec3(0.0f, 0.0f, 0.0f))
