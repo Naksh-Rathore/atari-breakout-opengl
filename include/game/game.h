@@ -29,6 +29,8 @@ namespace Game {
             float m_deltaTime;
             float m_lastFrame;
 
+            bool m_isPlaying;
+
             void parseLevel(const std::string& levelContent);
 
         public:
@@ -48,6 +50,7 @@ namespace Game {
             glm::mat4& view() { return m_view; }
             glm::mat4& projection() { return m_projection; }    
             float deltaTime() { return m_deltaTime; }
+            float isPlaying() { return m_isPlaying; }
     };
 }
 

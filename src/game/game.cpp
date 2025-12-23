@@ -25,6 +25,7 @@ namespace Game {
         , m_projection(glm::ortho(-400.0f, 400.0f, -400.0f, 400.0f))
         , m_deltaTime(0.0f)
         , m_lastFrame(0.0f)
+        , m_isPlaying(true)
     {
     }
 
