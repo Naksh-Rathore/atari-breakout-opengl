@@ -31,6 +31,7 @@ int main() {
 
         processInput(window, game);
 
+        game.checkWinLoss();
         game.drawAllObjects();
 
         glfwSwapBuffers(window);

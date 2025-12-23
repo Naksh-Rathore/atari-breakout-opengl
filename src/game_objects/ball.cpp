@@ -68,7 +68,7 @@ namespace GameObject {
 
         if (m_circle.x() > 350.0f || m_circle.x() < -350.0f)
             m_velocity.x *= -1;
-        if (m_circle.y() > 350.0f || m_circle.y() < -350.0f)
+        if (m_circle.y() > 350.0f)
             m_velocity.y *= -1;
 
         m_circle.translate(m_velocity * deltaTime);

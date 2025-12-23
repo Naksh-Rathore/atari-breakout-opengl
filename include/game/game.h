@@ -43,6 +43,8 @@ namespace Game {
             void linkBricks(const std::string& levelFilename);
             void linkBrickMesh();
 
+            void checkWinLoss();
+
             void drawAllObjects();
 
             GameObject::Paddle& paddle() { return m_paddle; }
@@ -50,7 +52,7 @@ namespace Game {
             glm::mat4& view() { return m_view; }
             glm::mat4& projection() { return m_projection; }    
             float deltaTime() { return m_deltaTime; }
-            float isPlaying() { return m_isPlaying; }
+            bool isPlaying() { return m_isPlaying; }
     };
 }
 

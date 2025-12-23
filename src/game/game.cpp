@@ -25,7 +25,6 @@ namespace Game {
         , m_projection(glm::ortho(-400.0f, 400.0f, -400.0f, 400.0f))
         , m_deltaTime(0.0f)
         , m_lastFrame(0.0f)
-        , m_isPlaying(true)
     {
     }
 
@@ -110,6 +109,9 @@ namespace Game {
                     m_bricks.emplace_back(position, glm::vec3(0.0f, 0.0f, 1.0f));
                     position.x += 125.0f;
                     break;
+
+                default:
+                    break;
             }
         }
     }
@@ -133,5 +135,21 @@ namespace Game {
 
         m_ball.update(m_paddle, 500, 200, m_deltaTime);
         m_ball.render();
+    }
+
+    // Optimize later
+    void Game::checkWinLoss() {
+        if (m_ball.circle().y() < -670.0f) {
+            m_isPlaying = false;
+            std::cout << "You lost!" << "\n";
+        }
+
+        for (GameObject::Brick& brick : m_bricks) {
+            if (!brick.isDestroyed()) 
+                return;
+        }
+
+        m_isPlaying = false;
+        std::cout << "You won!" << "\n";
     }
 }
