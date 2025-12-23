@@ -48,7 +48,13 @@ namespace GameObject {
         
         if (collisionResult) {
             m_isDestroyed = true;
+
             ball.flipVelocityY();
+
+            glm::vec3 vel = ball.velocity();
+            vel *= 1.05f;
+
+            ball.setVelocity(vel);
         }
     }
 }
