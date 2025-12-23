@@ -34,10 +34,9 @@ namespace GameObject {
         m_rect.draw();
     }
 
-    Brick::Brick(const glm::vec3& worldPos, const glm::vec3& color, bool isDestroyable)
+    Brick::Brick(const glm::vec3& worldPos, const glm::vec3& color)
         : m_worldPos(worldPos)
         , m_color(color)
-        , m_isDestroyable(isDestroyable)
         , m_isDestroyed(false)
         , m_modelMatrix(glm::mat4(1.0f))
     {
@@ -45,13 +44,11 @@ namespace GameObject {
     }
 
     void Brick::update(GameObject::Ball& ball) {
-        if (Collision::circleRectangle(ball.circle().x(), 
-                                       ball.circle().y(), 
-                                       ball.circle().radius(), 
-                                       m_worldPos.x, m_worldPos.y, 
-                                       150.0f, 100.0f)) {
-            if (m_isDestroyable)
-                m_isDestroyed = true;
+        bool collisionResult { Collision::circleRectangle(ball.circle().x(), ball.circle().y(), ball.circle().radius(), m_worldPos.x, m_worldPos.y, 150.0f, 100.0f) };
+        
+        if (collisionResult) {
+            m_isDestroyed = true;
+            ball.flipVelocityY();
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Game {
     }
 
     void Game::parseLevel(const std::string& levelContent) {
-        glm::vec3 position { glm::vec3(-300.0f, 300.0f, 0.0f) };
+        glm::vec3 position { glm::vec3(-300.0f, 325.0f, 0.0f) };
 
         for (auto character : levelContent) {
             if (character == '\n') {
@@ -96,21 +96,16 @@ namespace Game {
                     break;
 
                 case '1':
-                    m_bricks.emplace_back(position, glm::vec3(1.0f, 1.0f, 1.0f), false);
-                    position.x += 125.0f;   
-                    break;
-
-                case '2':
                     m_bricks.emplace_back(position, glm::vec3(1.0f, 0.0f, 0.0f));
                     position.x += 125.0f;
                     break;
                 
-                case '3':
+                case '2':
                     m_bricks.emplace_back(position, glm::vec3(0.0f, 1.0f, 0.0f));
                     position.x += 125.0f;
                     break;
 
-                case '4':
+                case '3':
                     m_bricks.emplace_back(position, glm::vec3(0.0f, 0.0f, 1.0f));
                     position.x += 125.0f;
                     break;
@@ -125,7 +120,7 @@ namespace Game {
         m_lastFrame = currentFrame;  
 
         for (GameObject::Brick &brick : m_bricks) {
-            if (brick.isDestroyed() && brick.isDestroyable())
+            if (brick.isDestroyed())
                 continue;
 
             brick.update(m_ball);

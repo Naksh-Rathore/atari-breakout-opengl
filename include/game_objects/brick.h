@@ -51,7 +51,6 @@ namespace GameObject {
 
     class Brick {
         private:    
-            bool m_isDestroyable;
             bool m_isDestroyed { false };
 
             glm::mat4 m_modelMatrix;
@@ -60,12 +59,9 @@ namespace GameObject {
             glm::vec3 m_color;
 
         public:
-            Brick(const glm::vec3& worldPos, const glm::vec3& color, bool isDestroyable = true);
+            Brick(const glm::vec3& worldPos, const glm::vec3& color);
 
             void update(GameObject::Ball& ball);
-
-            bool isDestroyable() const { return m_isDestroyable; }
-            void setIsDestroyable(bool value) { m_isDestroyable = value; }
 
             bool isDestroyed() const { return m_isDestroyed; }
             void setIsDestroyed(bool value) { m_isDestroyed = value; }
