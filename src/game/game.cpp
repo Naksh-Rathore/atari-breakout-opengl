@@ -84,7 +84,7 @@ namespace Game {
 
         for (auto character : levelContent) {
             if (character == '\n') {
-                position.y -= 125.0f;
+                position.y -= 100.0f;
                 position.x = -300.0f;
 
                 continue;
